@@ -24,12 +24,26 @@ export abstract class DioAccount {
     }
   }
 
-  withdraw = (): void => {
-    console.log('Voce sacou')
+
+
+  withdraw = (value:number): void => {
+    if ( this.balance - value >=0 && this.validateStatus()){
+      this.balance = this.balance - value
+      console.log('[+] Conta Válida')
+      console.log(` [!] Você sacou ${value}`)
+    }else{
+      console.log(` [!] Status da Conta ${this.validateStatus()}`)
+      console.log(` [-] Saldo Indisponível , não é possível sacar ${value}`)
+    }
+    console.log(` -> Saldo ${this.getBalance()}`)
   }
 
-  getBalance = (): void => {
-    console.log(this.balance)
+  getBalance = (): number => {
+    return this.balance
+  }
+
+  setBalance = (balance:number):number => {
+   return this.balance = this.balance + balance
   }
 
   private validateStatus = (): boolean => {
